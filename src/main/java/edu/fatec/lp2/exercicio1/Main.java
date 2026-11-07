@@ -1,17 +1,28 @@
 package edu.fatec.lp2.exercicio1;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import edu.fatec.lp2.exercicio1.mensagens.*;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Contatinho[] contatinhos = new Contatinho[3];
+        Mensagem[] mensagems = new Mensagem[3];
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        contatinhos[0] = new Contatinho("Pedro", "0");
+        contatinhos[1] = new Contatinho("Gustavo", "1");
+        contatinhos[2] = new Contatinho("Jonas", "2");
+
+        mensagems[0] = new MsgTexto(contatinhos[0], "12:40", "oi", 123);
+        mensagems[1] = new MsgAudio(contatinhos[1], "14:20", "tchau", 50);
+        mensagems[2] = new MsgFoto(contatinhos[2], "17:00", "oi", 1000);
+
+        Whatsapp w1 = new Whatsapp(contatinhos, mensagems);
+        w1.listarContatos();
+        w1.listarMensagens();
+
+        System.out.println("--- sendMessage ---");
+        for (int i = 0; i < mensagems.length; i++) {
+            Mensagem retorno = mensagems[i].sendMessage("novo conteudo");
+            System.out.println("Subclasse " + (i+1) + " retornou a propria instancia: " + (retorno == mensagems[i]));
         }
     }
 }
